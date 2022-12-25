@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'ap-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'alurapic';
-
-  description = 'bike';
-  url = 'https://upload.wikimedia.org/wikipedia/commons/6/66/Achol_Akhe_in_Bike.jpg';
+  photos = [
+    {
+      description: 'bike',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/6/66/Achol_Akhe_in_Bike.jpg',
+    },
+    {
+      description: 'city',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/ConcertgebouwMuseumpleinAmsterdam.jpg/800px-ConcertgebouwMuseumpleinAmsterdam.jpg',
+    },
+  ];
 }

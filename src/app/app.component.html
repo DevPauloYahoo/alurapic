@@ -1,7 +1,5 @@
-<h1>{{ title }}</h1>
-<img [alt]="description" [src]="url" />
-<img
-  alt="city"
-  src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/
-ConcertgebouwMuseumpleinAmsterdam.jpg/800px-ConcertgebouwMuseumpleinAmsterdam.jpg"
-/>
+<ap-photo
+  *ngFor="let photo of photos"
+  [description]="photo.description"
+  [url]="photo.url"
+></ap-photo>
