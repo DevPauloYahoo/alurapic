@@ -1,1 +1,13 @@
-<ap-photos [photos]="photos"></ap-photos>
+<div class="text-center mt-3 mb-3">
+  <form>
+    <input
+      (keyup)="filter = $any($event).target.value"
+      autofocus
+      class="rounded"
+      placeholder="Search..."
+      type="search"
+    />
+  </form>
+</div>
+
+<ap-photos [photos]="photos | filterByDescription : filter"></ap-photos>
