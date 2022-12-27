@@ -3,7 +3,15 @@
 <ol class="list-unstyled">
   <li *ngFor="let cols of rows" class="row g-0">
     <div *ngFor="let photo of cols" class="col-4">
-      <ap-photo [description]="photo.description" [url]="photo.url"></ap-photo>
+      <ap-card>
+        <ap-photo [description]="photo.description" [url]="photo.url"></ap-photo>
+        <div class="text-center p-1">
+          <i aria-hidden="true" class="fa fa-heart-o fa-2x me-2">{{ photo.likes }}</i>
+          <i aria-hidden="true" class="fa fa-comment-o fa-2x me-2 ms-2">{{
+            photo.comments
+          }}</i>
+        </div>
+      </ap-card>
     </div>
   </li>
 </ol>
