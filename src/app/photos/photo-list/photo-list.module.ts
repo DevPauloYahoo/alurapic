@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { CardModule } from '../../shared/components/card/card.module';
+import { DarkenOnHoverModule } from '../../shared/directives/darken-on-hover/darken-on-hover.module';
 import { PhotoModule } from '../photo/photo.module';
 import { FilterByDescriptionPipe } from './filter-by-description.pipe';
 import { LoadButtonComponent } from './load-button/load-button.component';
@@ -17,6 +18,6 @@ import { SearchComponent } from './search/search.component';
     FilterByDescriptionPipe,
     SearchComponent,
   ],
-  imports: [CommonModule, PhotoModule, CardModule],
+  imports: [CommonModule, PhotoModule, CardModule, DarkenOnHoverModule],
 })
 export class PhotoListModule {}

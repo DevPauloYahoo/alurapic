@@ -1,5 +1,5 @@
-<div class="text-center">
-  <h4 class="card-header">{{ title }}</h4>
+<div class="card text-center">
+  <h4 *ngIf="title" class="card-header">{{ title }}</h4>
   <div class="card-body">
     <ng-content></ng-content>
   </div>
