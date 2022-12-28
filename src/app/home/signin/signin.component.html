@@ -1,15 +1,34 @@
 <div class="container">
-  <h4 class="text-center">Login</h4>
-  <form class="mt-4">
+  <h4 class="text-center mt-4">Login</h4>
+  <form [formGroup]="loginForm" class="mt-4">
     <div class="mb-3">
-      <input autofocus class="form-control" placeholder="user name" type="text" />
+      <input
+        autofocus
+        class="form-control"
+        formControlName="username"
+        placeholder="user name"
+        type="text"
+      />
+      <div *ngIf="username?.touched && username?.invalid" class="text-danger">
+        {{ validationFields('username') }}
+      </div>
     </div>
     <div>
-      <input class="form-control" placeholder="password" type="password" />
+      <input
+        class="form-control"
+        formControlName="password"
+        placeholder="password"
+        type="password"
+      />
+      <div *ngIf="password?.touched && password?.invalid" class="text-danger">
+        {{ validationFields('password') }}
+      </div>
     </div>
   </form>
   <div class="d-grid mt-2 mb-2">
-    <button class="btn btn-primary" type="submit">Login</button>
+    <button [disabled]="loginForm.invalid" class="btn btn-primary" type="submit">
+      Login
+    </button>
   </div>
   <p>Not a user?<a href="#">Register now</a></p>
 </div>
