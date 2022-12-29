@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../core/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 import { FormValidationService } from '../../shared/form-validation.service';
 
 @Component({
@@ -13,9 +13,14 @@ import { FormValidationService } from '../../shared/form-validation.service';
 export class SigninComponent implements OnInit {
   loginForm!: FormGroup;
 
+  @ViewChild('userNameInput', { static: true }) userNameInput:
+    | ElementRef<HTMLInputElement>
+    | undefined;
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private render: Renderer2,
     private authService: AuthService,
     private formValidationService: FormValidationService,
   ) {}
@@ -47,6 +52,8 @@ export class SigninComponent implements OnInit {
       error: (err) => {
         console.error(err);
         this.loginForm.reset();
+        this.render.selectRootElement(this.userNameInput?.nativeElement).focus();
+        // this.userNameInput?.nativeElement.focus();
         alert('Credenciais inválidas');
       },
     });
