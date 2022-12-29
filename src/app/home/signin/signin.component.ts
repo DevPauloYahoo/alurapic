@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AuthService } from '../../core/auth.service';
 import { FormValidationService } from '../../shared/form-validation.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private authService: AuthService,
     private formValidationService: FormValidationService,
   ) {}
 
@@ -26,8 +28,22 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(4)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      userName: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(3)]],
+    });
+  }
+
+  login() {
+    const userName = this.loginForm.get('userName')?.value;
+    const password = this.loginForm.get('password')?.value;
+
+    this.authService.authenticate(userName, password).subscribe({
+      next: () => console.log('Autenticado'),
+      error: (err) => {
+        console.error(err);
+        this.loginForm.reset();
+        alert('Credenciais inválidas');
+      },
     });
   }
 

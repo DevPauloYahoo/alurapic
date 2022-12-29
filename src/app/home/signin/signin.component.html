@@ -5,12 +5,12 @@
       <input
         autofocus
         class="form-control"
-        formControlName="username"
+        formControlName="userName"
         placeholder="user name"
         type="text"
       />
       <div *ngIf="username?.touched && username?.invalid" class="text-danger">
-        {{ validationFields('username') }}
+        {{ validationFields('userName') }}
       </div>
     </div>
     <div>
@@ -26,7 +26,12 @@
     </div>
   </form>
   <div class="d-grid mt-2 mb-2">
-    <button [disabled]="loginForm.invalid" class="btn btn-primary" type="submit">
+    <button
+      (click)="login()"
+      [disabled]="loginForm.invalid"
+      class="btn btn-primary"
+      type="submit"
+    >
       Login
     </button>
   </div>
