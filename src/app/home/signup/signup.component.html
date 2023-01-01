@@ -1,6 +1,6 @@
 <div class="container">
   <h4 class="text-center">Register to embrace a new world!</h4>
-  <form class="mt-4">
+  <form [formGroup]="signupForm" class="mt-4">
     <div class="mb-3">
       <input
         #userEmailInput
@@ -10,6 +10,9 @@
         placeholder="user email"
         type="text"
       />
+      <div *ngIf="email?.touched && email?.invalid" class="text-danger">
+        {{ validationFields('email') }}
+      </div>
     </div>
     <div class="mb-3">
       <input
@@ -18,6 +21,9 @@
         placeholder="full name"
         type="text"
       />
+      <div *ngIf="fullName?.touched && fullName?.invalid" class="text-danger">
+        {{ validationFields('fullName') }}
+      </div>
     </div>
     <div class="mb-3">
       <input
@@ -26,11 +32,24 @@
         placeholder="user name"
         type="text"
       />
+      <div *ngIf="userName?.touched && userName?.invalid" class="text-danger">
+        {{ validationFields('userName') }}
+      </div>
     </div>
-    <div class="mb-3"></div>
+    <div class="mb-3">
+      <input
+        class="form-control"
+        formControlName="password"
+        placeholder="password"
+        type="password"
+      />
+      <div *ngIf="password?.touched && password?.invalid" class="text-danger">
+        {{ validationFields('password') }}
+      </div>
+    </div>
   </form>
   <div class="d-grid mt-2 mb-2">
-    <button class="btn btn-primary" type="submit">Login</button>
+    <button class="btn btn-primary" type="submit">Register</button>
   </div>
   <p>Already user?<a [routerLink]="['']" class="ms-2">Sign In!</a></p>
 </div>
