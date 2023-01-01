@@ -2,9 +2,9 @@
   <nav class="navbar p-2 bg-white">
     <a class="navbar-brand">ALURAPIC</a>
     <div *ngIf="user$ | async as user; else login">
-      <i class="fa fa-user-circle">
-        <a class="ms-2">{{ user.name }}</a>
-      </i>
+      <i class="fa fa-user-circle me-2"> </i>
+      <a class="me-2">{{ user.name }}</a>
+      <a (click)="logout()">(Logout)</a>
     </div>
     <ng-template #login>
       <span class="navbar-text">Please, login!</span>
