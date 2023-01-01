@@ -9,6 +9,7 @@ import { User } from './user';
   providedIn: 'root',
 })
 export class UserService {
+  private userName: string | undefined;
   private userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(
     null,
   );
@@ -31,10 +32,19 @@ export class UserService {
     this.userSubject.next(null);
   }
 
+  isLogged() {
+    return this.tokenService.hasToken();
+  }
+
+  getUserName() {
+    return this.userName;
+  }
+
   private decodeAndNotify() {
     const token = this.tokenService.getToken();
     if (token) {
       const user = jwt_decode(token) as User;
+      this.userName = user.name;
       this.userSubject.next(user);
     }
   }
