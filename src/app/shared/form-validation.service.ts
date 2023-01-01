@@ -31,7 +31,15 @@ export class FormValidationService {
     }
 
     if (field?.hasError('lowerCase')) {
-      return `${fieldName} deve ser em letras minúsculas`;
+      return `Username deve ser em letras minúsculas`;
+    }
+
+    if (field?.hasError('usernameExists')) {
+      return `Já existe um usuário com (username) informado`;
+    }
+
+    if (fieldName === 'userName' && field?.valid) {
+      return 'Username disponível';
     }
 
     return 'campo inválido';

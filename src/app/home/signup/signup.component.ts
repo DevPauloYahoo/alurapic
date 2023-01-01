@@ -3,6 +3,7 @@ import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
 import { lowerCaseValidator } from '../../shared/components/validators/lower-case.validator';
 import { FormValidationService } from '../../shared/form-validation.service';
+import { UserExistsValidatorService } from './user-exists-validator.service';
 
 @Component({
   selector: 'ap-signup',
@@ -15,6 +16,7 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private formValidationService: FormValidationService,
+    private userExistsValidatorService: UserExistsValidatorService,
   ) {}
 
   get email() {
@@ -48,6 +50,7 @@ export class SignupComponent implements OnInit {
           Validators.maxLength(30),
           lowerCaseValidator,
         ],
+        [this.userExistsValidatorService.isUsernameExists()],
       ],
       password: [
         '',

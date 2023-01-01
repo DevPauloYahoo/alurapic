@@ -35,6 +35,9 @@
       <div *ngIf="userName?.touched && userName?.invalid" class="text-danger">
         {{ validationFields('userName') }}
       </div>
+      <div *ngIf="userName?.touched && userName?.valid" class="text-success">
+        {{ validationFields('userName') }}
+      </div>
     </div>
     <div class="mb-3">
       <input
@@ -49,7 +52,13 @@
     </div>
   </form>
   <div class="d-grid mt-2 mb-2">
-    <button class="btn btn-primary" type="submit">Register</button>
+    <button
+      [disabled]="signupForm.invalid || signupForm.pending"
+      class="btn btn-primary"
+      type="submit"
+    >
+      Register
+    </button>
   </div>
   <p>Already user?<a [routerLink]="['']" class="ms-2">Sign In!</a></p>
 </div>
