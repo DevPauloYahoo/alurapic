@@ -4,10 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { SigninComponent } from './signin/signin.component';
-import { SignoutComponent } from './signout/signout.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
-  declarations: [SigninComponent, SignoutComponent],
+  declarations: [SigninComponent, SignupComponent],
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
 })
 export class HomeModule {}
