@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
+import { lowerCaseValidator } from '../../shared/components/validators/lower-case.validator';
 import { FormValidationService } from '../../shared/form-validation.service';
 
 @Component({
@@ -45,7 +46,7 @@ export class SignupComponent implements OnInit {
           Validators.required,
           Validators.minLength(4),
           Validators.maxLength(30),
-          Validators.pattern(/^[a-z0-9_\-]+$/),
+          lowerCaseValidator,
         ],
       ],
       password: [

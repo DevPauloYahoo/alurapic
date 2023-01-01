@@ -30,8 +30,8 @@ export class FormValidationService {
       return `${fieldName} inválido`;
     }
 
-    if (field?.hasError('pattern')) {
-      return `${fieldName} deve ser em letras minúsculas e não pode começar com números`;
+    if (field?.hasError('lowerCase')) {
+      return `${fieldName} deve ser em letras minúsculas`;
     }
 
     return 'campo inválido';
