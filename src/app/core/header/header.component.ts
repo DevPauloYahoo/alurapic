@@ -10,13 +10,14 @@ import { UserService } from '../user/user.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  user$: Observable<User>;
-  user: User | undefined;
+  user$: Observable<User | null>;
+
+  // user: User | undefined;
 
   constructor(private userService: UserService) {
     this.user$ = userService.getUser();
-    this.user$.subscribe({
-      next: (user) => (this.user = user),
-    });
+    // this.user$.subscribe({
+    //   next: (user) => (this.user = user),
+    // });
   }
 }
