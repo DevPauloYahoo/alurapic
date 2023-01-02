@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './core/auth/auth.guard';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './home/signin/signin.component';
 import { SignupComponent } from './home/signup/signup.component';
 import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
@@ -12,13 +13,20 @@ import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 const routes: Routes = [
   {
     path: '',
-    component: SigninComponent,
+    component: HomeComponent,
     canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: SigninComponent,
+      },
+      {
+        path: 'signup',
+        component: SignupComponent,
+      },
+    ],
   },
-  {
-    path: 'signup',
-    component: SignupComponent,
-  },
+
   {
     path: 'user/:username',
     component: PhotoListComponent,

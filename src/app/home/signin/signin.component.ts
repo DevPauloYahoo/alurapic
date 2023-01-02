@@ -38,6 +38,8 @@ export class SigninComponent implements OnInit {
       userName: ['', [Validators.required, Validators.minLength(4)]],
       password: ['', [Validators.required, Validators.minLength(3)]],
     });
+
+    this.render.selectRootElement(this.userNameInput?.nativeElement).focus();
   }
 
   login() {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -16,9 +16,14 @@ import { UserExistsValidatorService } from './user-exists-validator.service';
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
 
+  @ViewChild('emailInput', { static: true }) emailInput:
+    | ElementRef<HTMLInputElement>
+    | undefined;
+
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private router: Router,
+    private render: Renderer2,
     private signupService: SignupService,
     private formValidationService: FormValidationService,
     private userExistsValidatorService: UserExistsValidatorService,
@@ -62,6 +67,8 @@ export class SignupComponent implements OnInit {
         [Validators.required, Validators.minLength(4), Validators.maxLength(15)],
       ],
     });
+
+    this.render.selectRootElement(this.emailInput?.nativeElement).focus();
   }
 
   signup() {
