@@ -10,7 +10,7 @@
         placeholder="user name"
         type="text"
       />
-      <div *ngIf="username?.touched && username?.invalid" class="text-danger">
+      <div *ngIf="userName?.dirty && userName?.invalid" class="text-danger">
         {{ validationFields('userName') }}
       </div>
     </div>

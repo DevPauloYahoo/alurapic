@@ -25,8 +25,8 @@ export class SigninComponent implements OnInit {
     private formValidationService: FormValidationService,
   ) {}
 
-  get username() {
-    return this.loginForm.get('username');
+  get userName() {
+    return this.loginForm.get('userName');
   }
 
   get password() {

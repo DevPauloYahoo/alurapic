@@ -10,7 +10,7 @@
         placeholder="user email"
         type="text"
       />
-      <div *ngIf="email?.touched && email?.invalid" class="text-danger">
+      <div *ngIf="email?.dirty && email?.invalid" class="text-danger">
         {{ validationFields('email') }}
       </div>
     </div>
