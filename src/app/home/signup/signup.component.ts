@@ -12,6 +12,7 @@ import { UserExistsValidatorService } from './user-exists-validator.service';
   selector: 'ap-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
+  providers: [UserExistsValidatorService],
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
