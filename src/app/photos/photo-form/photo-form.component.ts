@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { FormValidationService } from '../../shared/form-validation.service';
+import { PhotoService } from '../photo/photo.service';
 
 @Component({
   selector: 'ap-photo-form',
@@ -14,6 +16,8 @@ export class PhotoFormComponent implements OnInit {
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
+    private router: Router,
+    private photoService: PhotoService,
     private formValidationService: FormValidationService,
   ) {}
 
@@ -36,7 +40,10 @@ export class PhotoFormComponent implements OnInit {
   upload() {
     const description = this.photoForm.get('description')?.value;
     const allowComments = this.photoForm.get('allowComments')?.value;
-    console.log(this.photoFile);
+    this.photoService.upload(description, allowComments, this.photoFile).subscribe({
+      next: () => this.router.navigate(['']),
+      error: (err) => console.log(err),
+    });
   }
 
   validationFields(fieldName: string) {
