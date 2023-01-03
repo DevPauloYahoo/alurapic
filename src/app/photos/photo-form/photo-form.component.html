@@ -1,8 +1,13 @@
 <div class="container">
-  <form [formGroup]="photoForm" class="row">
+  <form (ngSubmit)="upload()" [formGroup]="photoForm" class="row">
     <div class="col-md-6 text-center">
-      <input accept="image/*" formControlName="file" type="file" />
-      <div *ngIf="file?.touched && file?.invalid" class="text-danger">
+      <input
+        (change)="photoFile = $any($event).target.files[0]"
+        accept="image/*"
+        formControlName="file"
+        type="file"
+      />
+      <div *ngIf="file?.invalid" class="text-danger">
         {{ validationFields('file') }}
       </div>
     </div>
