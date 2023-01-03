@@ -1,21 +1,30 @@
 <div class="container">
-  <form class="row">
+  <form [formGroup]="photoForm" class="row">
     <div class="col-md-6 text-center">
-      <input accept="image/*" type="file" />
+      <input accept="image/*" formControlName="file" type="file" />
+      <div *ngIf="file?.touched && file?.invalid" class="text-danger">
+        {{ validationFields('file') }}
+      </div>
     </div>
     <div class="col-md-6">
       <div>
         <textarea
           class="form-control form-control-sm"
+          formControlName="description"
           placeholder="photo description"
         ></textarea>
+        <div *ngIf="description?.touched && description?.invalid" class="text-danger">
+          {{ validationFields('description') }}
+        </div>
       </div>
       <div class="form-check mt-1">
         <label class="text-muted me-2"> Allow comments </label>
-        <input class="form-check-input" type="checkbox" />
+        <input class="form-check-input" formControlName="allowComments" type="checkbox" />
       </div>
       <div class="d-grid gap-2 mt-3">
-        <button class="btn btn-primary" type="submit">Upload</button>
+        <button [disabled]="photoForm.invalid" class="btn btn-primary" type="submit">
+          Upload
+        </button>
         <a class="btn btn-secondary">Cancel</a>
       </div>
     </div>

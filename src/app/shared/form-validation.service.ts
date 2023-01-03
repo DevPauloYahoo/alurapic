@@ -9,6 +9,9 @@ export class FormValidationService {
     const field = formGroup.get(fieldName);
 
     if (field?.hasError('required')) {
+      if (fieldName.trim() === 'file') {
+        return 'Por favor, selecione uma foto';
+      }
       return `${fieldName} is required`;
     }
 
