@@ -1,10 +1,15 @@
 <div class="container">
   <form (ngSubmit)="upload()" [formGroup]="photoForm" class="row">
     <div class="col-md-6 text-center">
+      <button (click)="fileInput.click()" class="btn btn-primary" type="button">
+        <i class="fa fa-image fa-4x align-middle"></i>
+      </button>
       <input
+        #fileInput
         (change)="photoFile = $any($event).target.files[0]"
         accept="image/*"
         formControlName="file"
+        hidden
         type="file"
       />
       <div *ngIf="file?.invalid" class="text-danger">
