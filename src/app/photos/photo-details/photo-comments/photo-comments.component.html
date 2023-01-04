@@ -9,12 +9,21 @@
     </li>
   </ul>
   <div class="mt-4">
-    <form>
+    <form [formGroup]="commentForm">
       <div>
-        <textarea class="form-control"></textarea>
+        <textarea class="form-control" formControlName="comment"></textarea>
         <div class="input-group d-grid mt-2">
-          <button class="btn btn-primary pull-left" type="submit">Publish</button>
+          <button
+            [disabled]="commentForm.invalid"
+            class="btn btn-primary pull-left"
+            type="submit"
+          >
+            Publish
+          </button>
         </div>
+      </div>
+      <div *ngIf="comment?.invalid" class="text-danger">
+        {{ validationFields('comment', 'Comentário') }}
       </div>
     </form>
   </div>
