@@ -33,6 +33,17 @@ export class PhotoCommentsComponent implements OnInit {
     });
   }
 
+  addComment() {
+    return this.photoService
+      .addComment(this.photoId!, this.commentForm.controls['comment'].value)
+      .subscribe({
+        next: () => {
+          this.commentForm.reset();
+          alert('Comentário adicionado com sucesso.');
+        },
+      });
+  }
+
   validationFields(fieldName: string, translatedField: string) {
     return this.formValidationService.errorMessage(
       fieldName,

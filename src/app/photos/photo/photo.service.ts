@@ -31,6 +31,12 @@ export class PhotoService {
     return this.http.get<PhotoComment[]>(`${API_URL}/photos/${photoId}/comments`);
   }
 
+  addComment(photoId: number, commentText: string): Observable<PhotoComment> {
+    return this.http.post<PhotoComment>(`${API_URL}/photos/${photoId}/comments`, {
+      commentText,
+    });
+  }
+
   upload(description: string, allowComments: string, file: File): Observable<Object> {
     const formData = new FormData();
     formData.set('description', description);
