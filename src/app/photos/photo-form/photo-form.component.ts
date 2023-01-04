@@ -13,6 +13,7 @@ import { PhotoService } from '../photo/photo.service';
 export class PhotoFormComponent implements OnInit {
   photoForm!: FormGroup;
   photoFile!: File;
+  preview!: string | null;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -44,6 +45,13 @@ export class PhotoFormComponent implements OnInit {
       next: () => this.router.navigate(['']),
       error: (err) => console.log(err),
     });
+  }
+
+  handleFile(file: File) {
+    this.photoFile = file;
+    const reader = new FileReader();
+    reader.onload = (event) => (this.preview = event.target!.result as string);
+    reader.readAsDataURL(file);
   }
 
   validationFields(fieldName: string) {
