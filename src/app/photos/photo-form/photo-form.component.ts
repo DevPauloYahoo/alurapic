@@ -54,7 +54,11 @@ export class PhotoFormComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  validationFields(fieldName: string) {
-    return this.formValidationService.errorMessage(fieldName, this.photoForm);
+  validationFields(fieldName: string, translatedField: string) {
+    return this.formValidationService.errorMessage(
+      fieldName,
+      translatedField,
+      this.photoForm,
+    );
   }
 }

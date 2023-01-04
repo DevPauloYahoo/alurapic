@@ -11,7 +11,7 @@
         type="text"
       />
       <div *ngIf="userName?.dirty && userName?.invalid" class="text-danger">
-        {{ validationFields('userName') }}
+        {{ validationFields('userName', 'Usuário') }}
       </div>
     </div>
     <div>
@@ -22,7 +22,7 @@
         type="password"
       />
       <div *ngIf="password?.touched && password?.invalid" class="text-danger">
-        {{ validationFields('password') }}
+        {{ validationFields('password', 'Senha') }}
       </div>
     </div>
   </form>

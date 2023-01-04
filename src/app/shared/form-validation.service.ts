@@ -5,44 +5,44 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root',
 })
 export class FormValidationService {
-  errorMessage(fieldName: string, formGroup: FormGroup) {
+  errorMessage(fieldName: string, translatedField: string, formGroup: FormGroup) {
     const field = formGroup.get(fieldName);
 
     if (field?.hasError('required')) {
       if (fieldName.trim() === 'file') {
         return 'Por favor, selecione uma foto';
       }
-      return `${fieldName} is required`;
+      return `${translatedField} é obrigatório`;
     }
 
     if (field?.hasError('minlength')) {
       const requiredLength = field?.errors
         ? field.errors['minlength']['requiredLength']
         : 8;
-      return `${fieldName} dever ter no mínimo ${requiredLength} caracteres`;
+      return `${translatedField} dever ter no mínimo ${requiredLength} caracteres`;
     }
 
     if (field?.hasError('maxlength')) {
       const requiredLength = field?.errors
         ? field.errors['maxlength']['requiredLength']
         : 50;
-      return `${fieldName} dever ter no máximo ${requiredLength} caracteres`;
+      return `${translatedField} dever ter no máximo ${requiredLength} caracteres`;
     }
 
     if (field?.hasError('email')) {
-      return `${fieldName} inválido`;
+      return `${translatedField} inválido`;
     }
 
     if (field?.hasError('lowerCase')) {
-      return `Username deve ser em letras minúsculas`;
+      return `${translatedField} deve conter somente letras minúsculas`;
     }
 
     if (field?.hasError('usernameExists')) {
-      return `Já existe um usuário com (username) informado`;
+      return `Já existe um usuário com o (username) informado`;
     }
 
     if (fieldName === 'userName' && field?.valid) {
-      return 'Username disponível';
+      return `${translatedField} disponível`;
     }
 
     return 'campo inválido';

@@ -11,7 +11,7 @@
         type="text"
       />
       <div *ngIf="email?.dirty && email?.invalid" class="text-danger">
-        {{ validationFields('email') }}
+        {{ validationFields('email', 'Email') }}
       </div>
     </div>
     <div class="mb-3">
@@ -22,7 +22,7 @@
         type="text"
       />
       <div *ngIf="fullName?.touched && fullName?.invalid" class="text-danger">
-        {{ validationFields('fullName') }}
+        {{ validationFields('fullName', 'Nome completo') }}
       </div>
     </div>
     <div class="mb-3">
@@ -33,10 +33,10 @@
         type="text"
       />
       <div *ngIf="userName?.touched && userName?.invalid" class="text-danger">
-        {{ validationFields('userName') }}
+        {{ validationFields('userName', 'Usuário') }}
       </div>
       <div *ngIf="userName?.touched && userName?.valid" class="text-success">
-        {{ validationFields('userName') }}
+        {{ validationFields('userName', 'Usuário') }}
       </div>
     </div>
     <div class="mb-3">
@@ -47,7 +47,7 @@
         type="password"
       />
       <div *ngIf="password?.touched && password?.invalid" class="text-danger">
-        {{ validationFields('password') }}
+        {{ validationFields('password', 'Senha') }}
       </div>
     </div>
   </form>

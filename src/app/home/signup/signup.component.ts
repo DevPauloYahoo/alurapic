@@ -80,7 +80,11 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  validationFields(fieldName: string) {
-    return this.formValidationService.errorMessage(fieldName, this.signupForm);
+  validationFields(fieldName: string, translatedField: string) {
+    return this.formValidationService.errorMessage(
+      fieldName,
+      translatedField,
+      this.signupForm,
+    );
   }
 }

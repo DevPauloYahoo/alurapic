@@ -15,7 +15,7 @@
           type="file"
         />
         <div *ngIf="file?.invalid" class="text-danger">
-          {{ validationFields('file') }}
+          {{ validationFields('file', '') }}
         </div>
       </div>
 
@@ -33,7 +33,7 @@
           placeholder="photo description"
         ></textarea>
         <div *ngIf="description?.touched && description?.invalid" class="text-danger">
-          {{ validationFields('description') }}
+          {{ validationFields('description', 'Descrição') }}
         </div>
       </div>
       <div class="form-check mt-1">
