@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { Alert, AlertType } from './alert.class';
@@ -7,29 +8,53 @@ import { Alert, AlertType } from './alert.class';
   providedIn: 'root',
 })
 export class AlertGlobalService {
-  alertSubject: Subject<Alert> = new Subject<Alert>();
+  alertSubject: Subject<Alert | null> = new Subject<Alert | null>();
+  keepAfterRouteChange = false;
 
-  success(message: string): void {
-    this.alert(AlertType.SUCCESS, message);
+  constructor(router: Router) {
+    router.events.subscribe({
+      next: (event) => {
+        if (event instanceof NavigationStart) {
+          if (this.keepAfterRouteChange) {
+            this.keepAfterRouteChange = false;
+          } else {
+            this.clear();
+          }
+        }
+      },
+    });
   }
 
-  info(message: string): void {
-    this.alert(AlertType.INFO, message);
+  success(message: string, keepAfterRouteChange: boolean = false): void {
+    this.alert(AlertType.SUCCESS, message, keepAfterRouteChange);
   }
 
-  warning(message: string): void {
-    this.alert(AlertType.WARNING, message);
+  info(message: string, keepAfterRouteChange: boolean = false): void {
+    this.alert(AlertType.INFO, message, keepAfterRouteChange);
   }
 
-  danger(message: string): void {
-    this.alert(AlertType.DANGER, message);
+  warning(message: string, keepAfterRouteChange: boolean = false): void {
+    this.alert(AlertType.WARNING, message, keepAfterRouteChange);
+  }
+
+  danger(message: string, keepAfterRouteChange: boolean = false): void {
+    this.alert(AlertType.DANGER, message, keepAfterRouteChange);
   }
 
   getAlert() {
     return this.alertSubject.asObservable();
   }
 
-  private alert(alertType: AlertType, message: string): void {
+  clear() {
+    this.alertSubject.next(null);
+  }
+
+  private alert(
+    alertType: AlertType,
+    message: string,
+    keepAfterRouteChange: boolean,
+  ): void {
+    this.keepAfterRouteChange = keepAfterRouteChange;
     this.alertSubject.next(new Alert(alertType, message));
   }
 }

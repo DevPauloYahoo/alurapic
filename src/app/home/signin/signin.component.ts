@@ -20,7 +20,7 @@ export class SigninComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private render: Renderer2,
+    private renderer: Renderer2,
     private authService: AuthService,
     private formValidationService: FormValidationService,
   ) {}
@@ -39,7 +39,7 @@ export class SigninComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(3)]],
     });
 
-    this.render.selectRootElement(this.userNameInput?.nativeElement).focus();
+    this.renderer.selectRootElement(this.userNameInput?.nativeElement).focus();
   }
 
   login() {
@@ -54,8 +54,7 @@ export class SigninComponent implements OnInit {
       error: (err) => {
         console.error(err);
         this.loginForm.reset();
-        this.render.selectRootElement(this.userNameInput?.nativeElement).focus();
-        // this.userNameInput?.nativeElement.focus();
+        this.renderer.selectRootElement(this.userNameInput?.nativeElement).focus();
         alert('Credenciais inválidas');
       },
     });

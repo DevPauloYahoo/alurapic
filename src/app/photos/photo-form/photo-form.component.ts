@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { AlertGlobalService } from '../../shared/components/alert-global/alert-global.service';
 import { FormValidationService } from '../../shared/form-validation.service';
 import { PhotoService } from '../photo/photo.service';
 
@@ -19,6 +20,7 @@ export class PhotoFormComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder,
     private router: Router,
     private photoService: PhotoService,
+    private alertGlobalService: AlertGlobalService,
     private formValidationService: FormValidationService,
   ) {}
 
@@ -41,9 +43,16 @@ export class PhotoFormComponent implements OnInit {
   upload() {
     const description = this.photoForm.get('description')?.value;
     const allowComments = this.photoForm.get('allowComments')?.value;
+
     this.photoService.upload(description, allowComments, this.photoFile).subscribe({
-      next: () => this.router.navigate(['']),
-      error: (err) => console.log(err),
+      next: () =>
+        this.router
+          .navigate([''])
+          .then(() => this.alertGlobalService.success('Upload completado')),
+      error: (err) => {
+        this.alertGlobalService.warning('Upload falhou');
+        console.log(err);
+      },
     });
   }
 
