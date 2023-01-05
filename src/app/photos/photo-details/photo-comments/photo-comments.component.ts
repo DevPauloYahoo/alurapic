@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { FormValidationService } from '../../../shared/form-validation.service';
 import { PhotoComment } from '../../photo/photo-comment.interface';
@@ -12,7 +13,7 @@ import { PhotoService } from '../../photo/photo.service';
   styleUrls: ['./photo-comments.component.scss'],
 })
 export class PhotoCommentsComponent implements OnInit {
-  comments$: Observable<PhotoComment[]> = new Observable<PhotoComment[]>();
+  comments$: Observable<PhotoComment[]> = of([]);
   @Input() photoId: number | undefined;
   commentForm!: FormGroup;
 
@@ -33,15 +34,15 @@ export class PhotoCommentsComponent implements OnInit {
     });
   }
 
-  addComment() {
-    return this.photoService
+  saveComment() {
+    this.comments$ = this.photoService
       .addComment(this.photoId!, this.commentForm.controls['comment'].value)
-      .subscribe({
-        next: () => {
+      .pipe(
+        switchMap(() => this.photoService.getComments(this.photoId!)),
+        tap(() => {
           this.commentForm.reset();
-          alert('Comentário adicionado com sucesso.');
-        },
-      });
+        }),
+      );
   }
 
   validationFields(fieldName: string, translatedField: string) {
