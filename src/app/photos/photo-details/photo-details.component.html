@@ -11,7 +11,12 @@
           <i class="fa fa-comment ms-2"
             ><span class="ms-2">{{ photo.comments }}</span></i
           >
-          <i (click)="remove()" class="fa fa-trash pull-right"></i>
+          <i
+            (click)="remove()"
+            [ownedPhoto]="photo"
+            apPhotoOwnerOnly
+            class="fa fa-trash pull-right"
+          ></i>
         </div>
         <hr />
       </small>

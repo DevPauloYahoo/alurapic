@@ -3,3 +3,5 @@ export interface PhotoComment {
   text: string;
   userName: string;
 }
+
+export type CommentPhoto = PhotoComment | undefined;
