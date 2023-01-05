@@ -3,12 +3,21 @@
     <div class="col-lg-6">
       <ap-photo [description]="photo.description" [url]="photo.url"></ap-photo>
     </div>
+
     <div class="col-lg-4 p-6">
       <small>
         <p class="text-start break-word">{{ photo.description }}</p>
         <hr />
       </small>
-      <ap-photo-comments [photoId]="photo.id"></ap-photo-comments>
+
+      <ap-photo-comments
+        *ngIf="photo.allowComments; else warning"
+        [photoId]="photo.id"
+      ></ap-photo-comments>
+
+      <ng-template #warning>
+        <p>O usuário desabilitou comentários para esta foto</p>
+      </ng-template>
     </div>
   </div>
 </div>
