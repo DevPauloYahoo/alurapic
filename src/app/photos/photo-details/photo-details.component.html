@@ -7,6 +7,12 @@
     <div class="col-lg-4 p-6">
       <small>
         <p class="text-start break-word">{{ photo.description }}</p>
+        <div class="text-start mb-4">
+          <i class="fa fa-comment ms-2"
+            ><span class="ms-2">{{ photo.comments }}</span></i
+          >
+          <i (click)="remove()" class="fa fa-trash pull-right"></i>
+        </div>
         <hr />
       </small>
 

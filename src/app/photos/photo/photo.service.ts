@@ -45,4 +45,8 @@ export class PhotoService {
 
     return this.http.post(`${API_URL}/photos/upload`, formData);
   }
+
+  removePhotos(photoId: number): Observable<Object> {
+    return this.http.delete(`${API_URL}/photos/${photoId}`);
+  }
 }
